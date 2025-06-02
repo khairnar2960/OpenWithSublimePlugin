@@ -1,0 +1,8 @@
+{
+    "name": "OpenWithSublimePlugin",
+    "description": "A Sublime Text 4 plugin to open terminals and manage PHP versions.",
+    "author": "Harshal Khairnar",
+    "homepage": "https://github.com/khairnar2960/OpenWithSublimePlugin",
+    "repository": "https://github.com/khairnar2960/OpenWithSublimePlugin.git",
+    "labels": ["terminal", "PHP", "development"]
+}
