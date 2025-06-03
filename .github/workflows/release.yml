@@ -1,0 +1,41 @@
+name: Auto Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger when a new version tag is pushed
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Generate Changelog
+        uses: janheinrichmerker/action-github-changelog-generator@v2.3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Plugin Package
+        run: zip -r OpenWithSublimePlugin.sublime-package * -x "pack.py"
+
+      - name: Determine Pre-release Status
+        id: prerelease
+        run: |
+          if [[ "${{ github.ref_name }}" == *"-beta"* || "${{ github.ref_name }}" == *"-alpha"* ]]; then
+            echo "IS_PRERELEASE=true" >> $GITHUB_ENV
+          else
+            echo "IS_PRERELEASE=false" >> $GITHUB_ENV
+          fi
+
+      - name: Create GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.ref_name }}
+          name: "Release ${{ github.ref_name }}"
+          body: "Automated release for version ${{ github.ref_name }}"
+          artifacts: "OpenWithSublimePlugin.sublime-package"
+          prerelease: ${{ env.IS_PRERELEASE }}
+          draft: false
