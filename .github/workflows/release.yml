@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*'  # Trigger when a new version tag is pushed
 
+permissions:
+  contents: write  # Ensures GitHub Actions can create releases
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -19,7 +22,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Plugin Package
-        run: zip -r OpenWithSublimePlugin.sublime-package * -x "pack.py"
+        run: zip -r OpenWith.sublime-package * -x "pack.py"
 
       - name: Determine Pre-release Status
         id: prerelease
@@ -36,6 +39,6 @@ jobs:
           tag: ${{ github.ref_name }}
           name: "Release ${{ github.ref_name }}"
           body: "Automated release for version ${{ github.ref_name }}"
-          artifacts: "OpenWithSublimePlugin.sublime-package"
+          artifacts: "OpenWith.sublime-package"
           prerelease: ${{ env.IS_PRERELEASE }}
           draft: false
