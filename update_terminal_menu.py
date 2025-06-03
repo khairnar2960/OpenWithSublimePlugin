@@ -62,7 +62,7 @@ class UpdateTerminalMenuCommand(sublime_plugin.ApplicationCommand):
             })
             menuOptions = ['Context', 'Tab Context']
             for menuOption in menuOptions:
-                menu_path = os.path.join(sublime.packages_path(), "OpenWith", f"{menuOption}.sublime-menu")
+                menu_path = os.path.join(sublime.packages_path(), "OpenWith", "{}.sublime-menu".format(menuOption))
                 with open(menu_path, "w") as menu_file:
                     json.dump(menu_structure, menu_file, indent=4)
 
