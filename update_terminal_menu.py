@@ -60,10 +60,11 @@ class UpdateTerminalMenuCommand(sublime_plugin.ApplicationCommand):
                 "caption": "Reload",
                 "command": "update_terminal_menu"
             })
-
-            menu_path = os.path.join(sublime.packages_path(), "OpenWith", "Context.sublime-menu")
-            with open(menu_path, "w") as menu_file:
-                json.dump(menu_structure, menu_file, indent=4)
+            menuOptions = ['Context', 'Tab Context']
+            for menuOption in menuOptions:
+                menu_path = os.path.join(sublime.packages_path(), "OpenWith", f"{menuOption}.sublime-menu")
+                with open(menu_path, "w") as menu_file:
+                    json.dump(menu_structure, menu_file, indent=4)
 
             sublime.message_dialog("OpenWith menu updated! Restart Sublime to apply changes.")
 
