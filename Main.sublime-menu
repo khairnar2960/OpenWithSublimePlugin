@@ -1,0 +1,31 @@
+[
+	{
+		"id": "preferences",
+		"children": [
+			{
+				"id": "package-settings",
+				"children": [
+					{
+						"caption": "OpenWith",
+						"children": [
+							{
+								"command": "open_file",
+								"args": {
+									"file": "${packages}/OpenWith/OpenWith.sublime-settings"
+								},
+								"caption": "Settings – Default"
+							},
+							{
+								"command": "open_file",
+								"args": {
+									"file": "${packages}/User/OpenWith.sublime-settings"
+								},
+								"caption": "Settings – User"
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+]
